@@ -3,24 +3,18 @@ import React from 'react';
 class Sidebar extends React.Component {
   render() {
     return (
-      <aside style={styles.sidebarStyle}>
+      <div>
 
       <h3>News letter</h3>
       <form style={styles.formStyle} onSubmit={(e) => e.preventDefault()}>
         <input style={styles.inputStyle} type="email" placeholder="Enter your email" required />
         <button style={styles.buttonStyle} type="submit">Subscribe</button>
       </form>
-    </aside>
+    </div>
   );}
 };
 const styles = {
-  sidebarStyle : {
-    flex: '0 0 250px',
-    backgroundColor: '#f4f4f4',
-    padding: '20px',
-    borderRight: '1px solid #ddd',
-    height: 'fit-content'
-  },
+
 
    formStyle : {
     display: 'flex',

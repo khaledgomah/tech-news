@@ -1,46 +1,35 @@
+import React from 'react';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
-import Card from "./components/Card";
-import React from 'react';
-class App extends React.Component {
+import Slider from "./components/Slider";
+import Body from "./components/body";
 
-    newsData = [
-    {
-      title: "React",
-      description: "It is a static data for testing the card component.",
-    },
-    {
-      title: "Vite",
-      description: "It is a static data for testing the card component.",
-    },
-    {
-      title: "JavaScript",
-      description: "It is a static data for testing the card component.",
-    },
-  ];
+class App extends React.Component {
   render() {
     return (
       <div style={styles.containerStyle}>
         <Header />
-        <div style={styles.mainAreaStyle}>
-          <Sidebar />
-          <main style={styles.contentStyle}>
-            {this.newsData.map((item, index) => (
-              <Card
-                key={index}
-                title={item.title}
-                description={item.description}
-              />
-            ))}
+        
+        
+
+        <div style={styles.contentWrapper}>
+          
+          <aside style={styles.sidebarStyle}>
+            <Sidebar />
+          </aside>
+
+          <main style={styles.mainContent}>
+            <Slider />
+            <Body />
           </main>
         </div>
+
         <Footer />
       </div>
     );
   }
 }
-
 
 const styles = {
   containerStyle: {
@@ -48,15 +37,21 @@ const styles = {
     flexDirection: "column",
     minHeight: "100vh",
   },
-  mainAreaStyle: {
+  contentWrapper: {
     display: "flex",
+    flexDirection: "row",
     flex: 1,
-    padding: "0 20px",
   },
-
-  contentStyle: {
+  sidebarStyle: {
+    flex: '0 0 250px',
+    backgroundColor: '#f4f4f4',
+    padding: '20px',
+    borderRight: '1px solid #ddd',
+  },
+  mainContent: {
     flex: 1,
-    padding: "0 20px",
+    padding: "20px",
   },
 };
+
 export default App;
