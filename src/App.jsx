@@ -2,9 +2,10 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import Card from "./components/Card";
+import React from 'react';
+class App extends React.Component {
 
-function App() {
-  const newsData = [
+    newsData = [
     {
       title: "React",
       description: "It is a static data for testing the card component.",
@@ -18,26 +19,29 @@ function App() {
       description: "It is a static data for testing the card component.",
     },
   ];
-
-  return (
-    <div style={styles.containerStyle}>
-      <Header />
-      <div style={styles.mainAreaStyle}>
-        <Sidebar />
-        <main style={styles.contentStyle}>
-          {newsData.map((item, index) => (
-            <Card
-              key={index}
-              title={item.title}
-              description={item.description}
-            />
-          ))}
-        </main>
+  render() {
+    return (
+      <div style={styles.containerStyle}>
+        <Header />
+        <div style={styles.mainAreaStyle}>
+          <Sidebar />
+          <main style={styles.contentStyle}>
+            {this.newsData.map((item, index) => (
+              <Card
+                key={index}
+                title={item.title}
+                description={item.description}
+              />
+            ))}
+          </main>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  );
+    );
+  }
 }
+
+
 const styles = {
   containerStyle: {
     display: "flex",

@@ -1,13 +1,13 @@
-  
-const Footer = () => {
+  import React from 'react';
+class Footer extends React.Component {
 
-
-  return (
+  render() {return (
     <footer style={styles.footerStyle}>
       <p>It is my footer</p>
     </footer>
-  );
-};
+  );}
+}
+
 const styles = {
      footerStyle : {
     backgroundColor: '#333',

@@ -1,16 +1,17 @@
+import React from 'react';
 
-const Sidebar = () => {
- 
+class Sidebar extends React.Component {
+  render() {
+    return (
+      <aside style={styles.sidebarStyle}>
 
-  return (
-    <aside style={styles.sidebarStyle}>
       <h3>News letter</h3>
       <form style={styles.formStyle} onSubmit={(e) => e.preventDefault()}>
         <input style={styles.inputStyle} type="email" placeholder="Enter your email" required />
         <button style={styles.buttonStyle} type="submit">Subscribe</button>
       </form>
     </aside>
-  );
+  );}
 };
 const styles = {
   sidebarStyle : {
