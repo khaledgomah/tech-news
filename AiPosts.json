@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "ai_name": "ChatGPT",
+    "provider": "OpenAI",
+    "main_feature": "Conversational Mastery",
+    "description": "A versatile AI that can write code, compose essays, and engage in human-like dialogue.",
+    "tags": ["Text", "Coding", "Multilingual"],
+    "link": "https://chatgpt.com"
+  },
+  {
+    "id": 2,
+    "ai_name": "Midjourney",
+    "provider": "Midjourney Inc.",
+    "main_feature": "Artistic Image Generation",
+    "description": "High-quality AI art generator known for its stunning aesthetics and complex styles.",
+    "tags": ["Image", "Art", "Design"],
+    "link": "https://midjourney.com"
+  },
+  {
+    "id": 3,
+    "ai_name": "Claude",
+    "provider": "Anthropic",
+    "main_feature": "Natural Reasoning & Writing",
+    "description": "Known for its sophisticated writing style and high ethical standards, Claude excels in complex reasoning and long-form content.",
+    "tags": ["Writing", "Analysis", "Ethical AI"],
+    "link": "https://claude.ai"
+  },
+  {
+    "id": 4,
+    "ai_name": "Gemini",
+    "provider": "Google",
+    "main_feature": "Multimodal Integration",
+    "description": "Google's most capable AI, designed to seamlessly understand and combine text, code, audio, image, and video.",
+    "tags": ["Multimodal", "Google Workspace", "Research"],
+    "link": "https://gemini.google.com"
+  },
+  {
+    "id": 5,
+    "ai_name": "GitHub Copilot",
+    "provider": "GitHub / Microsoft",
+    "main_feature": "AI Pair Programmer",
+    "description": "An AI developer tool that helps you write code faster by suggesting lines or entire functions directly in your editor.",
+    "tags": ["Coding", "Development", "Autocomplete"],
+    "link": "https://github.com/features/copilot"
+  },
+  {
+    "id": 6,
+    "ai_name": "Perplexity",
+    "provider": "Perplexity AI",
+    "main_feature": "Conversational Search Engine",
+    "description": "A search engine that uses AI to provide direct answers to questions with cited sources from across the web.",
+    "tags": ["Search", "Citations", "Knowledge"],
+    "link": "https://perplexity.ai"
+  }
+]
