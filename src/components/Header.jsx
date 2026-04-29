@@ -1,12 +1,12 @@
-
-const Header = () => {
-  
-
-  return (
-    <header style={styles.headerStyle}>
-      <h1>Tech News</h1>
-    </header>
-  );
+import React from 'react';
+class Header extends React.Component {
+  render() {
+    return (
+      <header style={styles.headerStyle}>
+        <h1>Tech News</h1>
+      </header>
+    );
+  }
 };
 
 const styles = { headerStyle : {
