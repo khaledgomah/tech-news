@@ -10,15 +10,10 @@ class App extends React.Component {
     return (
       <div style={styles.containerStyle}>
         <Header />
-        
-        
-
         <div style={styles.contentWrapper}>
-          
           <aside style={styles.sidebarStyle}>
             <Sidebar />
           </aside>
-
           <main style={styles.mainContent}>
             <Slider />
             <Body />
