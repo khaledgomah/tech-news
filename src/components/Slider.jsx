@@ -1,66 +1,46 @@
-import React from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-class Slider extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentIndex: 0
+function Slider() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const images = useMemo(
+    () => ['src/assets/ai.png', 'src/assets/coding.png', 'src/assets/robot.png', 'src/assets/robot2.png'],
+    [],
+  );
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex >= images.length - 1 ? 0 : prevIndex + 1));
+  }, [images.length]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex <= 0 ? images.length - 1 : prevIndex - 1));
+  }, [images.length]);
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 3000);
+
+    return () => {
+      clearInterval(timer);
     };
-    this.images = [
-      "src/assets/ai.png",
-      "src/assets/coding.png",
-      "src/assets/robot.png",
-      "src/assets/robot2.png",
-    ];
-  }
+  }, [nextSlide]);
 
-  nextSlide= ()=>{
-    console.log("next slide");
-   var  newIndex = this.state.currentIndex +1;
-   if (newIndex>this.images.length-1) {
-      newIndex = 0;
-   }
-    return this.setState(() => ({
-      currentIndex: newIndex
-    }));
-  };
+  const currentSlideSrc = useMemo(() => images[currentIndex], [images, currentIndex]);
 
-  prevSlide = () => {
-    console.log("previous slide");
-    var newIndex = this.state.currentIndex - 1;
-    if (newIndex < 0) {
-      newIndex = this.images.length - 1;
-    }
-    this.setState(() => ({
-      currentIndex: newIndex
-    }));
-  };
+  return (
+    <div style={{ textAlign: 'center', position: 'relative', maxWidth: '600px', margin: 'auto' }}>
+      <img
+        src={currentSlideSrc}
+        alt={`Slide ${currentIndex}`}
+        style={{ width: '100%', height: '300px', borderRadius: '10px', objectFit: 'cover' }}
+      />
 
-  componentDidMount() {
-    this.timer = setInterval(this.nextSlide, 3000);
-  }
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-
-  render() {
-    const { currentIndex } = this.state;
-    return (
-      <div style={{ textAlign: 'center', position: 'relative', maxWidth: '600px', margin: 'auto' }}>
-        <img 
-          src={this.images[currentIndex]} 
-          alt={`Slide ${currentIndex}`} 
-          style={{ width: '100%', height: '300px', borderRadius: '10px', objectFit: 'cover' }} 
-        />
-        
-        <div style={{ margin: '10px' }}>
-          <button onClick={this.prevSlide} style={buttonStyle}>previous</button>
-          <button onClick={this.nextSlide} style={buttonStyle}>next</button>
-        </div>
-
+      <div style={{ margin: '10px' }}>
+        <button onClick={prevSlide} style={buttonStyle}>previous</button>
+        <button onClick={nextSlide} style={buttonStyle}>next</button>
       </div>
-    );
-  }
+
+    </div>
+  );
 }
 
 const buttonStyle = {

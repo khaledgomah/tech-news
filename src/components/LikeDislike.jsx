@@ -1,20 +1,14 @@
-import React from 'react';
-
-class LikeDislike extends React.Component {
-  render() {
-    const { likes = 0, dislikes = 0, onLike, onDislike } = this.props;
-
-    return (
-      <div style={styles.actionsRow}>
-        <button style={styles.likeButton} onClick={onLike}>
-          Like ({likes})
-        </button>
-        <button style={styles.dislikeButton} onClick={onDislike}>
-          Dislike ({dislikes})
-        </button>
-      </div>
-    );
-  }
+function LikeDislike({ likes = 0, dislikes = 0, onLike, onDislike }) {
+  return (
+    <div style={styles.actionsRow}>
+      <button style={styles.likeButton} onClick={onLike}>
+        Like ({likes})
+      </button>
+      <button style={styles.dislikeButton} onClick={onDislike}>
+        Dislike ({dislikes})
+      </button>
+    </div>
+  );
 }
 
 const styles = {

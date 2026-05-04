@@ -1,29 +1,43 @@
-import React from 'react';
+import { useCallback, useState } from 'react';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import Slider from "./components/Slider";
 import Body from "./components/body";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div style={styles.containerStyle}>
-        <Header />
-        <div style={styles.contentWrapper}>
-          <aside style={styles.sidebarStyle}>
-            <Sidebar />
-          </aside>
-          <main style={styles.mainContent}>
-            <Slider />
-            <Body />
-          </main>
-        </div>
+function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchBy, setSearchBy] = useState('title');
 
-        <Footer />
+  const handleSearchTermChange = useCallback((value) => {
+    setSearchTerm(value);
+  }, []);
+
+  const handleSearchByChange = useCallback((value) => {
+    setSearchBy(value);
+  }, []);
+
+  return (
+    <div style={styles.containerStyle}>
+      <Header
+        searchTerm={searchTerm}
+        searchBy={searchBy}
+        onSearchTermChange={handleSearchTermChange}
+        onSearchByChange={handleSearchByChange}
+      />
+      <div style={styles.contentWrapper}>
+        <aside style={styles.sidebarStyle}>
+          <Sidebar />
+        </aside>
+        <main style={styles.mainContent}>
+          <Slider />
+          <Body searchTerm={searchTerm} searchBy={searchBy} />
+        </main>
       </div>
-    );
-  }
+
+      <Footer />
+    </div>
+  );
 }
 
 const styles = {

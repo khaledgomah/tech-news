@@ -1,66 +1,61 @@
-import React from 'react';
+import { useCallback, useState } from 'react';
 
 const initialState = {
   ai_name: '',
   provider: '',
   description: '',
-  tags: '',
+  category: '',
   image: '',
   link: '',
   likes: 0,
   dislikes: 0,
 };
 
-class PostForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = this.getFormState(props.post);
+function getFormState(post) {
+  if (!post) {
+    return { ...initialState };
   }
 
-  getFormState = (post) => {
-    if (!post) {
-      return { ...initialState };
-    }
-
-    return {
-      ...initialState,
-      ...post,
-      tags: Array.isArray(post.tags) ? post.tags.join(', ') : post.tags ?? '',
-    };
+  return {
+    ...initialState,
+    ...post,
+    category: post.category ?? '',
   };
+}
 
-  handleChange = (event) => {
+function PostForm({ onSubmit, post, submitting = false }) {
+  const [formState, setFormState] = useState(() => getFormState(post));
+
+  const handleChange = useCallback((event) => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
+    setFormState((prevState) => ({ ...prevState, [name]: value }));
+  }, []);
 
-  handleSubmit = async (event) => {
-    event.preventDefault();
-    await this.props.onSubmit(this.state);
-    this.setState(this.getFormState(this.props.post));
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
+      await onSubmit(formState);
+      setFormState(getFormState(post));
+    },
+    [onSubmit, formState, post],
+  );
 
-  };
-
-  render() {
-    const { submitting = false, post } = this.props;
-
-    return (
-      <form onSubmit={this.handleSubmit} style={styles.form}>
-        <h3 style={styles.title}>{post ? 'Update AI Post' : 'Add New AI Post'}</h3>
-        <input style={styles.input} name="ai_name" value={this.state.ai_name} onChange={this.handleChange} placeholder="AI Name" required />
-        <input style={styles.input} name="provider" value={this.state.provider} onChange={this.handleChange} placeholder="Provider" required />
-        <textarea style={styles.textarea} name="description" value={this.state.description} onChange={this.handleChange} placeholder="Description" required />
-        <input style={styles.input} name="tags" value={this.state.tags} onChange={this.handleChange} placeholder="Tags" required />
-        <input style={styles.input} name="image" value={this.state.image} onChange={this.handleChange} placeholder="Image URL" />
-        <input style={styles.input} type="url" name="link" value={this.state.link} onChange={this.handleChange} placeholder="https://example.com" required />
-        <div style={styles.actionsRow}>
-          <button style={styles.submit} type="submit" disabled={submitting}>
-            {submitting ? 'Saving...' : post ? 'Update Post' : 'Add Post'}
-          </button>
-        </div>
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={handleSubmit} style={styles.form}>
+      <h3 style={styles.title}>{post ? 'Update AI Post' : 'Add New AI Post'}</h3>
+      <input style={styles.input} name="ai_name" value={formState.ai_name} onChange={handleChange} placeholder="AI Name" required />
+      <input style={styles.input} name="provider" value={formState.provider} onChange={handleChange} placeholder="Provider" required />
+      <textarea style={styles.textarea} name="description" value={formState.description} onChange={handleChange} placeholder="Description" required />
+      <input style={styles.input} name="category" value={formState.category} onChange={handleChange} placeholder="Category" required />
+      <input style={styles.input} name="image" value={formState.image} onChange={handleChange} placeholder="Image URL" />
+      <input style={styles.input} type="url" name="link" value={formState.link} onChange={handleChange} placeholder="https://example.com" required />
+      <div style={styles.actionsRow}>
+        <button style={styles.submit} type="submit" disabled={submitting}>
+          {submitting ? 'Saving...' : post ? 'Update Post' : 'Add Post'}
+        </button>
+      </div>
+    </form>
+  );
 }
 
 const styles = {

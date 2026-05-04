@@ -1,32 +1,13 @@
 {
   "posts": [
     {
-      "id": "2",
-      "ai_name": "Midjourney",
-      "provider": "Midjourney Inc.",
-      "main_feature": "Artistic Image Generation",
-      "image": "https://picsum.photos/seed/midjourney/800/400",
-      "description": "High-quality AI art generator known for its stunning aesthetics and complex styles.",
-      "tags": [
-        "Image",
-        "Art",
-        "Design"
-      ],
-      "link": "https://midjourney.com",
-      "likes": 6,
-      "dislikes": 5
-    },
-    {
       "id": "3",
       "ai_name": "Claude",
       "provider": "Anthropic",
       "main_feature": "Natural Reasoning & Writing",
       "image": "https://picsum.photos/seed/claude/800/400",
       "description": "Known for its sophisticated writing style and high ethical standards, Claude excels in complex reasoning and long-form content.",
-      "tags": [
-        "Writing",
-        "Analysis"
-      ],
+      "category": "Writing",
       "link": "https://claude.ai",
       "likes": 8,
       "dislikes": 4
@@ -38,11 +19,7 @@
       "main_feature": "Multimodal Integration",
       "image": "https://picsum.photos/seed/gemini/800/400",
       "description": "Google's most capable AI, designed to seamlessly understand and combine text, code, audio, image, and video.",
-      "tags": [
-        "Multimodal",
-        "Google Workspace",
-        "Research"
-      ],
+      "category": "Multimodal",
       "link": "https://gemini.google.com",
       "likes": 0,
       "dislikes": 0
@@ -54,11 +31,7 @@
       "main_feature": "AI Pair Programmer",
       "image": "https://picsum.photos/seed/github-copilot/800/400",
       "description": "An AI developer tool that helps you write code faster by suggesting lines or entire functions directly in your editor.",
-      "tags": [
-        "Coding",
-        "Development",
-        "Autocomplete"
-      ],
+      "category": "Coding",
       "link": "https://github.com/features/copilot",
       "likes": 0,
       "dislikes": 0
@@ -70,11 +43,7 @@
       "main_feature": "Conversational Search Engine",
       "image": "https://picsum.photos/seed/perplexity/800/400",
       "description": "A search engine that uses AI to provide direct answers to questions with cited sources from across the web.",
-      "tags": [
-        "Search",
-        "Citations",
-        "Knowledge"
-      ],
+      "category": "Search",
       "link": "https://perplexity.ai",
       "likes": 0,
       "dislikes": 0

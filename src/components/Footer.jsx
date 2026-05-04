@@ -1,11 +1,9 @@
-  import React from 'react';
-class Footer extends React.Component {
-
-  render() {return (
+function Footer() {
+  return (
     <footer style={styles.footerStyle}>
       <p>It is my footer</p>
     </footer>
-  );}
+  );
 }
 
 const styles = {

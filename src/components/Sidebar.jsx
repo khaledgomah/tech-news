@@ -1,9 +1,6 @@
-import React from 'react';
-
-class Sidebar extends React.Component {
-  render() {
-    return (
-      <div>
+function Sidebar() {
+  return (
+    <div>
 
       <h3>News letter</h3>
       <form style={styles.formStyle} onSubmit={(e) => e.preventDefault()}>
@@ -11,8 +8,8 @@ class Sidebar extends React.Component {
         <button style={styles.buttonStyle} type="submit">Subscribe</button>
       </form>
     </div>
-  );}
-};
+  );
+}
 const styles = {
 
 
