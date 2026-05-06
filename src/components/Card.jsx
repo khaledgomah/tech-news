@@ -1,5 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import LikeDislike from './LikeDislike';
+import { Link } from 'react-router-dom';
+
 function Card({ data, onLike, onDislike, onEdit, onDelete }) {
   const category = useMemo(
     () => String(data.category ?? '').trim(),
@@ -47,6 +49,7 @@ function Card({ data, onLike, onDislike, onEdit, onDelete }) {
       <div style={styles.actionsRow}>
         <button type="button" style={styles.editButton} onClick={handleEditClick}>Update</button>
         <button type="button" style={styles.deleteButton} onClick={handleDeleteClick}>Delete</button>
+        <Link to={`/news/${data.id}`} style={styles.detailsButton}>Details</Link>
       </div>
     </div>
   );
@@ -114,6 +117,19 @@ const styles = {
     color: '#b91c1c',
     cursor: 'pointer',
     fontWeight: 600,
+  },
+  detailsButton: {
+    padding: '8px 12px',
+    border: 'none',
+    borderRadius: '6px',
+    backgroundColor: '#f3f4f6',
+    color: '#374151',
+    cursor: 'pointer',
+    fontWeight: 600,
+    textDecoration: 'none',
+    fontSize: '14px',
+    display: 'inline-block',
+    textAlign: 'center'
   },
 };
 export default Card;

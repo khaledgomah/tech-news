@@ -1,66 +1,66 @@
-import { useCallback, useState } from 'react';
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Sidebar from "./components/Sidebar";
-import Slider from "./components/Slider";
-import Body from "./components/body";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import Layout from './Layout';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import NewsDetails from './pages/NewsDetails';
+import NotFound from './pages/NotFound';
+
+import ProtectedRoute from './ProtectedRoute';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'home',
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'signup',
+        element: <Signup />,
+      },
+      {
+        path: 'news/:id',
+        element: (
+          <ProtectedRoute>
+            <NewsDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '*',
+        element: <NotFound />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchBy, setSearchBy] = useState('title');
-
-  const handleSearchTermChange = useCallback((value) => {
-    setSearchTerm(value);
-  }, []);
-
-  const handleSearchByChange = useCallback((value) => {
-    setSearchBy(value);
-  }, []);
-
   return (
-    <div style={styles.containerStyle}>
-      <Header
-        searchTerm={searchTerm}
-        searchBy={searchBy}
-        onSearchTermChange={handleSearchTermChange}
-        onSearchByChange={handleSearchByChange}
-      />
-      <div style={styles.contentWrapper}>
-        <aside style={styles.sidebarStyle}>
-          <Sidebar />
-        </aside>
-        <main style={styles.mainContent}>
-          <Slider />
-          <Body searchTerm={searchTerm} searchBy={searchBy} />
-        </main>
-      </div>
-
-      <Footer />
-    </div>
+    <>
+      <Toaster position="top-center" reverseOrder={false} />
+      <RouterProvider router={router} />
+    </>
   );
 }
-
-const styles = {
-  containerStyle: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
-  },
-  contentWrapper: {
-    display: "flex",
-    flexDirection: "row",
-    flex: 1,
-  },
-  sidebarStyle: {
-    flex: '0 0 250px',
-    backgroundColor: '#f4f4f4',
-    padding: '20px',
-    borderRight: '1px solid #ddd',
-  },
-  mainContent: {
-    flex: 1,
-    padding: "20px",
-  },
-};
 
 export default App;

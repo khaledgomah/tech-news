@@ -49,5 +49,13 @@
       "dislikes": 0
     }
   ],
+  "users": [
+    {
+      "fullName": "khaled gomah elsayed",
+      "email": "khaledgomah10@gmail.com",
+      "password": "123456",
+      "id": "orajP57T5es"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
