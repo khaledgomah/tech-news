@@ -7,16 +7,19 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "json-server --watch AiPosts.json --port 8000"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
+    "@reduxjs/toolkit": "^2.11.2",
     "i18next": "^26.0.10",
     "lucide-react": "^1.14.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-hot-toast": "^2.6.0",
     "react-i18next": "^17.0.7",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.14.2"
   },
   "devDependencies": {
@@ -28,6 +31,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
+    "json-server": "^1.0.0-beta.15",
     "vite": "^8.0.10"
   }
 }

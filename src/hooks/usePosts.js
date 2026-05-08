@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPosts, addPost, updatePost, deletePost, setLoading } from '../redux/slices/newsSlice';
 
 async function request(url, options) {
   const response = await fetch(url, options);
@@ -32,64 +34,58 @@ function toPostPayload(formData) {
 }
 
 export default function usePosts(apiUrl) {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { posts, loading } = useSelector((state) => state.news);
   const [submitting, setSubmitting] = useState(false);
   const [editingPost, setEditingPost] = useState(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        dispatch(setLoading(true));
         const data = await requestJson(apiUrl);
-        setPosts(data);
+        dispatch(setPosts(data));
       } catch (error) {
         console.error(error);
       } finally {
-        setLoading(false);
+        dispatch(setLoading(false));
       }
     };
 
     fetchPosts();
-  }, [apiUrl]);
-
-  const patchPostList = useCallback((postId, field, value) => {
-    setPosts((prev) =>
-      prev.map((post) => (post.id === postId ? { ...post, [field]: value } : post)),
-    );
-  }, []);
+  }, [apiUrl, dispatch]);
 
   const updateReaction = useCallback(
     async (postId, field, currentValue = 0) => {
       try {
         const updatedValue = currentValue + 1;
-        await request(`${apiUrl}/${postId}`, {
+        const response = await requestJson(`${apiUrl}/${postId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ [field]: updatedValue }),
         });
-        patchPostList(postId, field, updatedValue);
+        dispatch(updatePost(response));
       } catch (error) {
         console.error(error);
       }
     },
-    [apiUrl, patchPostList],
+    [apiUrl, dispatch],
   );
 
-  const deletePost = useCallback(
+  const removePost = useCallback(
     async (postId) => {
       try {
         await request(`${apiUrl}/${postId}`, {
           method: 'DELETE',
         });
-
-        setPosts((prev) => prev.filter((item) => item.id !== postId));
+        dispatch(deletePost(postId));
       } catch (error) {
         console.error(error);
       }
     },
-    [apiUrl],
+    [apiUrl, dispatch],
   );
 
   const editPost = useCallback((post) => {
@@ -111,9 +107,7 @@ export default function usePosts(apiUrl) {
             body: JSON.stringify({ ...editingPost, ...post }),
           });
 
-          setPosts((prev) =>
-            prev.map((item) => (item.id === updatedPost.id ? updatedPost : item)),
-          );
+          dispatch(updatePost(updatedPost));
           setEditingPost(null);
           return;
         }
@@ -125,14 +119,14 @@ export default function usePosts(apiUrl) {
           },
           body: JSON.stringify(post),
         });
-        setPosts((prev) => [createdPost, ...prev]);
+        dispatch(addPost(createdPost));
       } catch (error) {
         console.error(error);
       } finally {
         setSubmitting(false);
       }
     },
-    [apiUrl, editingPost],
+    [apiUrl, editingPost, dispatch],
   );
 
   return {
@@ -141,8 +135,8 @@ export default function usePosts(apiUrl) {
     submitting,
     editingPost,
     updateReaction,
-    deletePost,
+    deletePost: removePost,
     editPost,
     handleSubmitPost,
   };
-}
+}

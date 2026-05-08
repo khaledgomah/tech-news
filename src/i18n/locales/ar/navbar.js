@@ -1,12 +1,12 @@
 const navbar = {
-  app_name: "أخبار التقنية",
+  app_name: "تيك نيوز",
   nav: {
     home: "الرئيسية",
     login: "تسجيل الدخول",
-    signup: "إنشاء حساب",
+    signup: "انشاء حساب",
     logout: "تسجيل الخروج"
   },
-  english: "الإنجليزية",
+  english: "الانجليزية",
   arabic: "العربية"
 };
 

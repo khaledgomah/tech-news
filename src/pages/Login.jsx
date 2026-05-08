@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../redux/slices/authSlice';
 import toast from 'react-hot-toast';
 
 function Login() {
@@ -9,6 +11,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +24,7 @@ function Login() {
       const user = users.find(u => u.email === email && u.password === password);
 
       if (user) {
-        localStorage.setItem('user', JSON.stringify(user));
+        dispatch(loginSuccess(user));
         toast.success(t('welcomeBack', { name: user.fullName }));
           navigate('/');
       } else {

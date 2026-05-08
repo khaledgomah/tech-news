@@ -1,10 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../redux/slices/authSlice';
 
 function NavBar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { t, i18n } = useTranslation('navbar');
-  const user = JSON.parse(localStorage.getItem('user'));
+  const { user } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
     localStorage.removeItem('user');

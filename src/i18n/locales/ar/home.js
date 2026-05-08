@@ -16,7 +16,7 @@ const home = {
   },
   form: {
     updateTitle: "تحديث منشور الذكاء الاصطناعي",
-    addTitle: "إضافة منشور ذكاء اصطناعي جديد",
+    addTitle: "اضافة منشور ذكاء اصطناعي جديد",
     aiName: "اسم الذكاء الاصطناعي",
     provider: "المزود",
     description: "الوصف",
@@ -25,14 +25,14 @@ const home = {
     linkPlaceholder: "https://example.com",
     saving: "جاري الحفظ...",
     updateBtn: "تحديث المنشور",
-    addBtn: "إضافة المنشور"
+    addBtn: "اضافة المنشور"
   },
   footer: {
-    text: "هذا هو التذييل الخاص بي"
+    text: "هذا هو الفوتر الخاص بي"
   },
   sidebar: {
     title: "النشرة الإخبارية",
-    emailPlaceholder: "أدخل بريدك الإلكتروني",
+    emailPlaceholder: "ادخل بريدك الإلكتروني",
     subscribe: "اشتراك"
   }
 };
