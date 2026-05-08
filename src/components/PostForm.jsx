@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const initialState = {
   ai_name: '',
@@ -24,6 +25,7 @@ function getFormState(post) {
 }
 
 function PostForm({ onSubmit, post, submitting = false }) {
+  const { t } = useTranslation('home');
   const [formState, setFormState] = useState(() => getFormState(post));
 
   const handleChange = useCallback((event) => {
@@ -42,16 +44,16 @@ function PostForm({ onSubmit, post, submitting = false }) {
 
   return (
     <form onSubmit={handleSubmit} style={styles.form}>
-      <h3 style={styles.title}>{post ? 'Update AI Post' : 'Add New AI Post'}</h3>
-      <input style={styles.input} name="ai_name" value={formState.ai_name} onChange={handleChange} placeholder="AI Name" required />
-      <input style={styles.input} name="provider" value={formState.provider} onChange={handleChange} placeholder="Provider" required />
-      <textarea style={styles.textarea} name="description" value={formState.description} onChange={handleChange} placeholder="Description" required />
-      <input style={styles.input} name="category" value={formState.category} onChange={handleChange} placeholder="Category" required />
-      <input style={styles.input} name="image" value={formState.image} onChange={handleChange} placeholder="Image URL" />
-      <input style={styles.input} type="url" name="link" value={formState.link} onChange={handleChange} placeholder="https://example.com" required />
+      <h3 style={styles.title}>{post ? t('form.updateTitle') : t('form.addTitle')}</h3>
+      <input style={styles.input} name="ai_name" value={formState.ai_name} onChange={handleChange} placeholder={t('form.aiName')} required />
+      <input style={styles.input} name="provider" value={formState.provider} onChange={handleChange} placeholder={t('form.provider')} required />
+      <textarea style={styles.textarea} name="description" value={formState.description} onChange={handleChange} placeholder={t('form.description')} required />
+      <input style={styles.input} name="category" value={formState.category} onChange={handleChange} placeholder={t('form.category')} required />
+      <input style={styles.input} name="image" value={formState.image} onChange={handleChange} placeholder={t('form.image')} />
+      <input style={styles.input} type="url" name="link" value={formState.link} onChange={handleChange} placeholder={t('form.linkPlaceholder')} required />
       <div style={styles.actionsRow}>
         <button style={styles.submit} type="submit" disabled={submitting}>
-          {submitting ? 'Saving...' : post ? 'Update Post' : 'Add Post'}
+          {submitting ? t('form.saving') : post ? t('form.updateBtn') : t('form.addBtn')}
         </button>
       </div>
     </form>

@@ -1,0 +1,30 @@
+const auth = {
+  welcome: "Welcome back",
+  fullName: "Full Name",
+  email: "Email",
+  password: "Password",
+  submitLogin: "Login",
+  submitSignup: "Sign Up",
+  welcomeBack: "Welcome back, {{name}}!",
+  invalidCredentials: "Invalid email or password",
+  connectionError: "Connection error. Is the server running?",
+  pleaseLogin: "Please login to your account",
+  emailPlaceholder: "Enter your email",
+  passwordPlaceholder: "Enter your password",
+  loggingIn: "Logging in...",
+  noAccount: "Don't have an account?",
+  passwordsDoNotMatch: "Passwords do not match",
+  userAlreadyExists: "User with this email already exists",
+  accountCreated: "Account created successfully!",
+  failedToCreateAccount: "Failed to create account",
+  createAccount: "Create Account",
+  joinCommunity: "Join our tech community today",
+  fullNamePlaceholder: "Enter your full name",
+  createPasswordPlaceholder: "Create a password",
+  confirmPassword: "Confirm Password",
+  confirmPasswordPlaceholder: "Confirm your password",
+  creatingAccount: "Creating Account...",
+  alreadyHaveAccount: "Already have an account?"
+};
+
+export default auth;

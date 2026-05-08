@@ -1,7 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function NavBar() {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation('navbar');
   const user = JSON.parse(localStorage.getItem('user'));
 
   const handleLogout = () => {
@@ -9,20 +11,34 @@ function NavBar() {
     navigate('/login');
   };
 
+  const toggleLanguage = () => {
+    const currentLang = i18n.language || 'en';
+    const newLang = currentLang.startsWith('en') ? 'ar' : 'en';
+    i18n.changeLanguage(newLang);
+    localStorage.setItem('lng', newLang);
+    document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = newLang;
+  };
+
   return (
     <header style={styles.headerStyle}>
       <div style={styles.topRow}>
-        <h1 style={styles.title}>Tech News</h1>
+        <h1 style={styles.title}>{t('app_name')}</h1>
         <nav style={styles.nav}>
-          <Link to="/" style={styles.navLink}>Home</Link>
+          <Link to="/" style={styles.navLink}>{t('nav.home')}</Link>
           {!user ? (
             <>
-              <Link to="/login" style={styles.navLink}>Login</Link>
-              <Link to="/signup" style={styles.navLink}>Sign Up</Link>
+              <Link to="/login" style={styles.navLink}>{t('nav.login')}</Link>
+              <Link to="/signup" style={styles.navLink}>{t('nav.signup')}</Link>
             </>
           ) : (
-            <button onClick={handleLogout} style={styles.logoutBtn}>Logout ({user.fullName})</button>
+            <button onClick={handleLogout} style={styles.logoutBtn}>
+              {t('nav.logout')} ({user.fullName})
+            </button>
           )}
+          <button onClick={toggleLanguage} style={styles.langBtn}>
+            {(i18n.language || 'en').startsWith('en') ? t('arabic') : t('english')}
+          </button>
         </nav>
       </div>
     </header>
@@ -75,6 +91,18 @@ const styles = {
     fontWeight: '500',
     fontSize: '14px',
     marginLeft: '10px'
+  },
+  langBtn: {
+    backgroundColor: 'transparent',
+    color: 'white',
+    border: '1px solid white',
+    padding: '4px 10px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    fontWeight: '500',
+    fontSize: '14px',
+    marginLeft: '10px',
+    transition: 'all 0.3s ease'
   }
 }
 

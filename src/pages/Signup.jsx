@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 
 function Signup() {
+  const { t } = useTranslation(['auth', 'navbar']);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -23,7 +25,7 @@ function Signup() {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match');
+      toast.error(t('passwordsDoNotMatch'));
       return;
     }
 
@@ -33,7 +35,7 @@ function Signup() {
       const existingUsers = await response.json();
 
       if (existingUsers.length > 0) {
-        toast.error('User with this email already exists');
+        toast.error(t('userAlreadyExists'));
         setLoading(false);
         return;
       }
@@ -51,13 +53,13 @@ function Signup() {
       });
 
       if (createResponse.ok) {
-        toast.success('Account created successfully!');
+        toast.success(t('accountCreated'));
         navigate('/login');
       } else {
-        toast.error('Failed to create account');
+        toast.error(t('failedToCreateAccount'));
       }
     } catch (err) {
-      toast.error('Connection error. Is the server running?');
+      toast.error(t('connectionError'));
     } finally {
       setLoading(false);
     }
@@ -66,16 +68,16 @@ function Signup() {
   return (
     <div style={styles.container}>
       <div style={styles.formCard}>
-        <h2 style={styles.title}>Create Account</h2>
-        <p style={styles.subtitle}>Join our tech community today</p>
+        <h2 style={styles.title}>{t('createAccount')}</h2>
+        <p style={styles.subtitle}>{t('joinCommunity')}</p>
 
         <form style={styles.form} onSubmit={handleSubmit}>
           <div style={styles.inputGroup}>
-            <label style={styles.label}>Full Name</label>
+            <label style={styles.label}>{t('fullName')}</label>
             <input 
               name="fullName"
               type="text" 
-              placeholder="Enter your full name" 
+              placeholder={t('fullNamePlaceholder')} 
               style={styles.input} 
               value={formData.fullName}
               onChange={handleChange}
@@ -83,11 +85,11 @@ function Signup() {
             />
           </div>
           <div style={styles.inputGroup}>
-            <label style={styles.label}>Email</label>
+            <label style={styles.label}>{t('email')}</label>
             <input 
               name="email"
               type="email" 
-              placeholder="Enter your email" 
+              placeholder={t('emailPlaceholder')} 
               style={styles.input} 
               value={formData.email}
               onChange={handleChange}
@@ -95,11 +97,11 @@ function Signup() {
             />
           </div>
           <div style={styles.inputGroup}>
-            <label style={styles.label}>Password</label>
+            <label style={styles.label}>{t('password')}</label>
             <input 
               name="password"
               type="password" 
-              placeholder="Create a password" 
+              placeholder={t('createPasswordPlaceholder')} 
               style={styles.input} 
               value={formData.password}
               onChange={handleChange}
@@ -107,11 +109,11 @@ function Signup() {
             />
           </div>
           <div style={styles.inputGroup}>
-            <label style={styles.label}>Confirm Password</label>
+            <label style={styles.label}>{t('confirmPassword')}</label>
             <input 
               name="confirmPassword"
               type="password" 
-              placeholder="Confirm your password" 
+              placeholder={t('confirmPasswordPlaceholder')} 
               style={styles.input} 
               value={formData.confirmPassword}
               onChange={handleChange}
@@ -119,11 +121,11 @@ function Signup() {
             />
           </div>
           <button type="submit" style={styles.button} disabled={loading}>
-            {loading ? 'Creating Account...' : 'Sign Up'}
+            {loading ? t('creatingAccount') : t('navbar:nav.signup')}
           </button>
         </form>
         <p style={styles.footerText}>
-          Already have an account? <Link to="/login" style={styles.link}>Login</Link>
+          {t('alreadyHaveAccount')} <Link to="/login" style={styles.link}>{t('navbar:nav.login')}</Link>
         </p>
       </div>
     </div>

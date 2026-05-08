@@ -1,0 +1,30 @@
+const auth = {
+  welcome: "مرحباً بعودتك",
+  fullName: "الاسم الكامل",
+  email: "البريد الإلكتروني",
+  password: "كلمة المرور",
+  submitLogin: "دخول",
+  submitSignup: "تسجيل",
+  welcomeBack: "مرحباً بعودتك، {{name}}!",
+  invalidCredentials: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+  connectionError: "خطأ في الاتصال. هل السيرفر يعمل؟",
+  pleaseLogin: "يرجى تسجيل الدخول إلى حسابك",
+  emailPlaceholder: "أدخل بريدك الإلكتروني",
+  passwordPlaceholder: "أدخل كلمة المرور",
+  loggingIn: "جاري الدخول...",
+  noAccount: "ليس لديك حساب؟",
+  passwordsDoNotMatch: "كلمات المرور غير متطابقة",
+  userAlreadyExists: "مستخدم بهذا البريد الإلكتروني موجود بالفعل",
+  accountCreated: "تم إنشاء الحساب بنجاح!",
+  failedToCreateAccount: "فشل إنشاء الحساب",
+  createAccount: "إنشاء حساب",
+  joinCommunity: "انضم إلى مجتمعنا التقني اليوم",
+  fullNamePlaceholder: "أدخل اسمك الكامل",
+  createPasswordPlaceholder: "أنشئ كلمة مرور",
+  confirmPassword: "تأكيد كلمة المرور",
+  confirmPasswordPlaceholder: "أكد كلمة المرور",
+  creatingAccount: "جاري إنشاء الحساب...",
+  alreadyHaveAccount: "لديك حساب بالفعل؟"
+};
+
+export default auth;

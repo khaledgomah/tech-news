@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function Slider() {
+  const { t } = useTranslation('home');
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = useMemo(
@@ -35,8 +37,8 @@ function Slider() {
       />
 
       <div style={{ margin: '10px' }}>
-        <button onClick={prevSlide} style={buttonStyle}>previous</button>
-        <button onClick={nextSlide} style={buttonStyle}>next</button>
+        <button onClick={prevSlide} style={buttonStyle}>{t('slider.previous')}</button>
+        <button onClick={nextSlide} style={buttonStyle}>{t('slider.next')}</button>
       </div>
 
     </div>

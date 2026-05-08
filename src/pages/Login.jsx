@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 
 function Login() {
+  const { t } = useTranslation(['auth', 'navbar']);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -20,13 +22,13 @@ function Login() {
 
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
-        toast.success(`Welcome back, ${user.fullName}!`);
+        toast.success(t('welcomeBack', { name: user.fullName }));
           navigate('/');
       } else {
-        toast.error('Invalid email or password');
+        toast.error(t('invalidCredentials'));
       }
     } catch (err) {
-      toast.error('Connection error. Is the server running?');
+      toast.error(t('connectionError'));
     } finally {
       setLoading(false);
     }
@@ -35,15 +37,15 @@ function Login() {
   return (
     <div style={styles.container}>
       <div style={styles.formCard}>
-        <h2 style={styles.title}>Welcome Back</h2>
-        <p style={styles.subtitle}>Please login to your account</p>
+        <h2 style={styles.title}>{t('welcome')}</h2>
+        <p style={styles.subtitle}>{t('pleaseLogin')}</p>
 
         <form style={styles.form} onSubmit={handleSubmit}>
           <div style={styles.inputGroup}>
-            <label style={styles.label}>Email</label>
+            <label style={styles.label}>{t('email')}</label>
             <input 
               type="email" 
-              placeholder="Enter your email" 
+              placeholder={t('emailPlaceholder')} 
               style={styles.input} 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -51,10 +53,10 @@ function Login() {
             />
           </div>
           <div style={styles.inputGroup}>
-            <label style={styles.label}>Password</label>
+            <label style={styles.label}>{t('password')}</label>
             <input 
               type="password" 
-              placeholder="Enter your password" 
+              placeholder={t('passwordPlaceholder')} 
               style={styles.input} 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -62,11 +64,11 @@ function Login() {
             />
           </div>
           <button type="submit" style={styles.button} disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? t('loggingIn') : t('submitLogin')}
           </button>
         </form>
         <p style={styles.footerText}>
-          Don't have an account? <Link to="/signup" style={styles.link}>Sign Up</Link>
+          {t('noAccount')} <Link to="/signup" style={styles.link}>{t('navbar:nav.signup')}</Link>
         </p>
       </div>
     </div>

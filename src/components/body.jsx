@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import Card from './Card';
 import PostForm from './PostForm';
 import usePosts from '../hooks/usePosts';
@@ -6,6 +7,7 @@ import usePosts from '../hooks/usePosts';
 const API_URL = 'http://localhost:8000/posts';
 
 function Body({ searchTerm, searchBy }) {
+  const { t } = useTranslation('home');
   const {
     posts,
     loading,
@@ -75,7 +77,7 @@ function Body({ searchTerm, searchBy }) {
         onSubmit={handleSubmitPost}
       />
       {loading ? (
-        <p>Loading posts...</p>
+        <p>{t('posts.loading')}</p>
       ) : (
         <div style={styles.postsGrid}>
           {filteredPosts.map((item) => (

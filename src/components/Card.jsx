@@ -1,8 +1,10 @@
 import { useCallback, useMemo } from 'react';
 import LikeDislike from './LikeDislike';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Card({ data, onLike, onDislike, onEdit, onDelete }) {
+  const { t } = useTranslation('home');
   const category = useMemo(
     () => String(data.category ?? '').trim(),
     [data.category],
@@ -31,14 +33,14 @@ function Card({ data, onLike, onDislike, onEdit, onDelete }) {
       <img src={imageSrc} alt={data.ai_name} style={styles.imageStyle} />
       <h2 style={styles.titleStyle}>{data.ai_name}</h2>
       <p style={styles.descriptionStyle}>{data.description}</p>
-      <p style={styles.descriptionStyle}><strong>Provider:</strong> {data.provider}</p>
+      <p style={styles.descriptionStyle}><strong>{t('posts.provider')}:</strong> {data.provider}</p>
       {category ? (
         <p style={styles.categoryLine}>
-          <strong>Category:</strong> <span style={styles.categoryChip}>{category}</span>
+          <strong>{t('posts.category')}:</strong> <span style={styles.categoryChip}>{category}</span>
         </p>
       ) : null}
       <a href={data.link} target="_blank" rel="noopener noreferrer" style={styles.descriptionStyle}>
-        {data.ai_name} link
+        {data.ai_name} {t('posts.link')}
       </a>
       <LikeDislike
         likes={data.likes}
@@ -47,9 +49,9 @@ function Card({ data, onLike, onDislike, onEdit, onDelete }) {
         onDislike={handleDislikeClick}
       />
       <div style={styles.actionsRow}>
-        <button type="button" style={styles.editButton} onClick={handleEditClick}>Update</button>
-        <button type="button" style={styles.deleteButton} onClick={handleDeleteClick}>Delete</button>
-        <Link to={`/news/${data.id}`} style={styles.detailsButton}>Details</Link>
+        <button type="button" style={styles.editButton} onClick={handleEditClick}>{t('posts.update')}</button>
+        <button type="button" style={styles.deleteButton} onClick={handleDeleteClick}>{t('posts.delete')}</button>
+        <Link to={`/news/${data.id}`} style={styles.detailsButton}>{t('posts.details')}</Link>
       </div>
     </div>
   );

@@ -1,7 +1,10 @@
+import { useTranslation } from 'react-i18next';
+
 function Footer() {
+  const { t } = useTranslation('home');
   return (
     <footer style={styles.footerStyle}>
-      <p>It is my footer</p>
+      <p>{t('footer.text')}</p>
     </footer>
   );
 }

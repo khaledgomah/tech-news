@@ -1,11 +1,14 @@
+import { useTranslation } from 'react-i18next';
+
 function Sidebar() {
+  const { t } = useTranslation('home');
   return (
     <div>
 
-      <h3>News letter</h3>
+      <h3>{t('sidebar.title')}</h3>
       <form style={styles.formStyle} onSubmit={(e) => e.preventDefault()}>
-        <input style={styles.inputStyle} type="email" placeholder="Enter your email" required />
-        <button style={styles.buttonStyle} type="submit">Subscribe</button>
+        <input style={styles.inputStyle} type="email" placeholder={t('sidebar.emailPlaceholder')} required />
+        <button style={styles.buttonStyle} type="submit">{t('sidebar.subscribe')}</button>
       </form>
     </div>
   );

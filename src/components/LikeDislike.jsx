@@ -1,11 +1,14 @@
+import { useTranslation } from 'react-i18next';
+
 function LikeDislike({ likes = 0, dislikes = 0, onLike, onDislike }) {
+  const { t } = useTranslation('home');
   return (
     <div style={styles.actionsRow}>
       <button style={styles.likeButton} onClick={onLike}>
-        Like ({likes})
+        {t('posts.like')} ({likes})
       </button>
       <button style={styles.dislikeButton} onClick={onDislike}>
-        Dislike ({dislikes})
+        {t('posts.dislike')} ({dislikes})
       </button>
     </div>
   );

@@ -1,23 +1,25 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function NewsDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation('details');
 
   return (
     <div style={styles.container}>
       <button onClick={() => navigate(-1)} style={styles.backButton}>
-        &larr; Back to News
+        &larr; {t('backToNews')}
       </button>
       <div style={styles.detailsCard}>
-        <h2 style={styles.title}>News Details</h2>
+        <h2 style={styles.title}>{t('title')}</h2>
         <div style={styles.infoBox}>
-          <p style={styles.label}>Viewing details for Post ID:</p>
+          <p style={styles.label}>{t('viewingLabel')}</p>
           <span style={styles.idBadge}>{id}</span>
         </div>
         <p style={styles.description}>
-          This page demonstrates dynamic routing in React. The ID <strong>{id}</strong> was retrieved from the URL using <code>useParams()</code>.
+          {t('description', { id })}
         </p>
         <div style={styles.placeholderContent}>
           <div style={styles.skeletonLine}></div>
